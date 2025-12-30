@@ -21,18 +21,17 @@ app.post('/request-report', async (req, res) => {
   // Cria no banco como 'new'
   const request = await prisma.request.create({ data: { email, status: 'new' } });
 
-  // Avisa o primeiro worker (Pub)
+  // Avisa o primeiro worker
   await publisher.publish('process:fetching', request.id);
 
   // Redireciona para página de status
   res.redirect(`/status/${request.id}`);
 });
 
-// Rota 3: Página de Status (Retorna HTML com Polling)
+// Rota 3: Página de Status
 app.get('/status/:id', async (req, res) => {
   const { id } = req.params;
   
-  // HTML Simples embutido para facilitar
   const html = `
     <html>
       <head><title>Status do Pedido</title></head>

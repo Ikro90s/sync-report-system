@@ -1,2 +1,13 @@
 node_modules
+dist
+.env
+.DS_Store
 storage/*
+!storage/.gitkeep
+prisma/*.db
+coverage/
+npm-debug.log
+yarn-error.log
+test-results/
+.idea/
+.vscode/
